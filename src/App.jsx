@@ -1,8 +1,9 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import Profile from "./component/profile";
-import Company from "./component/Company";
-import Project from "./component/Project";
+import Profile from "./component/Profile";
+import MapPlay from "./component/MapPlay";
+import MapOverlay from "./component/MapOverlay";
+import "./App.css";
 
 function useParallax(value, distance) {
   return useTransform(value, [0, 1], [-distance, distance]);
@@ -11,17 +12,16 @@ function useParallax(value, distance) {
 function getComponentById(id, activeId) {
   const components = {
     1: Profile,
-    2: Profile,
-    3: Company,
+    2: MapPlay,
+    3: MapOverlay,
   };
 
   const SelectedComponent = components[id] || Profile;
 
-  // Only render the component if it's active
   if (id === activeId) {
     return (
       <motion.div
-        key={id} // Key ensures re-mounting
+        key={id}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -47,7 +47,7 @@ function NumberDisplay({ id, activeId }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className="w-full h-full flex justify-center items-center"
-          style={{ y, width: "100%" }} // Explicitly set width to 100%
+          style={{ y, width: "100%" }}
         >
           {getComponentById(id, activeId)}
         </motion.div>
@@ -71,6 +71,7 @@ export default function App() {
       const sectionHeight = window.innerHeight;
       const newActiveId = Math.round(scrollPosition / sectionHeight) + 1;
       setActiveId(newActiveId);
+      console.log("Active ID:", newActiveId); // Debugging log
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -78,7 +79,10 @@ export default function App() {
   }, []);
 
   return (
-    <div id="example" className="relative w-full ">
+    <div
+      id="example"
+      className="relative w-full bg-gradient-to-br from-gray-900 to-blue-800 shadow-xl rounded-xl"
+    >
       {[1, 2, 3].map((id) => (
         <NumberDisplay key={id} id={id} activeId={activeId} />
       ))}
@@ -99,8 +103,9 @@ function StyleSheet() {
             position: fixed;
             left: 0;
             right: 0;
-            height: 5px;
-            background: #4ff0b7;
+            border-radius:4px;
+            height: 8px;
+            background:rgb(40, 43, 101);
             bottom: 50px;
             transform: scaleX(0);
         }

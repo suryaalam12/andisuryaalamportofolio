@@ -3,14 +3,12 @@ import { motion } from "framer-motion";
 
 export default function Profile() {
   const sentence = "Andi Surya Alam".split(" ");
-
-  // Variants for staggered animation
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Delay each word animation
+        staggerChildren: 0.2,
       },
     },
   };
@@ -24,7 +22,6 @@ export default function Profile() {
     },
   };
 
-  // Skill set data
   const skills = [
     "JavaScript",
     "React",
@@ -38,13 +35,12 @@ export default function Profile() {
     "D3.js",
   ];
 
-  // Variants for skill badges
   const skillContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Delay each skill badge animation
+        staggerChildren: 0.1,
       },
     },
   };
@@ -65,14 +61,12 @@ export default function Profile() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
     >
-      {/* Left Div (30%) */}
       <motion.div
         className="w-1/3 flex flex-col items-center justify-center p-8 border-r border-gray-600"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10 }}
       >
-        {/* Wrapping words inside a motion container */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -99,7 +93,6 @@ export default function Profile() {
         </motion.div>
       </motion.div>
 
-      {/* Right Div (70%) */}
       <motion.div
         className="w-2/3 flex flex-col items-center justify-center p-8"
         initial={{ opacity: 0, x: 50 }}
