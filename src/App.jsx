@@ -1,8 +1,11 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Profile from "./component/Profile";
+import Header from "./component/Header";
 import MapPlay from "./component/MapPlay";
 import MapOverlay from "./component/MapOverlay";
+import ZonasiProject from "./component/ZonasiProject";
+import UpdatingSpatial from "./component/UpdatingSpatial";
 import "./App.css";
 
 function useParallax(value, distance) {
@@ -14,6 +17,8 @@ function getComponentById(id, activeId) {
     1: Profile,
     2: MapPlay,
     3: MapOverlay,
+    4: ZonasiProject,
+    5: UpdatingSpatial,
   };
 
   const SelectedComponent = components[id] || Profile;
@@ -79,11 +84,9 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      id="example"
-      className="relative w-full bg-gradient-to-br from-gray-900 to-blue-800 shadow-xl rounded-xl"
-    >
-      {[1, 2, 3].map((id) => (
+    <div id="example" className="relative w-full bg-white rounded-xl">
+      <Header activeId={activeId} /> {/* Add the Header component here */}
+      {[1, 2, 3, 4, 5].map((id) => (
         <NumberDisplay key={id} id={id} activeId={activeId} />
       ))}
       <motion.div className="progress" style={{ scaleX }} />
@@ -103,9 +106,9 @@ function StyleSheet() {
             position: fixed;
             left: 0;
             right: 0;
-            border-radius:4px;
-            height: 8px;
-            background:rgb(40, 43, 101);
+            border-radius:10px;
+            height: 20px;
+            background:rgb(0, 117, 138);
             bottom: 50px;
             transform: scaleX(0);
         }

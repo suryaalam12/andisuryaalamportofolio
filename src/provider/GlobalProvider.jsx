@@ -6,6 +6,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [state, setState] = useState({
     latLng: null,
     bufferArea: null,
+    chartDataOvrly: null,
   });
 
   return (

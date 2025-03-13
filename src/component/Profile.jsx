@@ -23,16 +23,27 @@ export default function Profile() {
   };
 
   const skills = [
-    "JavaScript",
-    "React",
-    "Node.js",
     "GIS",
+    "Web Development",
+    "Spatial Data Processing",
+    "Geospatial Analysis",
+    "PostGIS",
+    "Turf.js",
+    "Magellan",
+    "Laravel",
+    "Inertia.js",
+    "React",
+    "PostGIS",
+    "JavaScript",
+    "React Native (Expo, EAS)",
+    "Leaflet.js",
+    "Context API",
+    "Secure API Development",
+    "High-Performance Backend",
     "Web Mapping",
-    "Python",
-    "PostgreSQL",
-    "Leaflet",
-    "Mapbox",
-    "D3.js",
+    "QGIS",
+    "Spatial SQL",
+    "JavaScript DOM Manipulation",
   ];
 
   const skillContainerVariants = {
@@ -56,17 +67,33 @@ export default function Profile() {
 
   return (
     <motion.div
-      className="w-full max-w-4xl flex bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white text-lg shadow-lg rounded-lg overflow-hidden"
+      className="w-full h-full flex flex-col bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
     >
+      {/* Top Section: Avatar, Name, and Title */}
       <motion.div
-        className="w-1/3 flex flex-col items-center justify-center p-8 border-r border-gray-600"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="w-full flex flex-col items-center justify-center p-8 border-b border-gray-600"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10 }}
       >
+        {/* Avatar */}
+        <motion.div
+          className="w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-400 mb-4"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 120, damping: 10 }}
+        >
+          <img
+            src="/path-to-your-avatar.jpg"
+            alt="Your Avatar"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+
+        {/* Animated Sentence */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -83,56 +110,59 @@ export default function Profile() {
             </motion.span>
           ))}
         </motion.div>
+
+        {/* Title */}
         <motion.div
           className="mt-6 text-lg text-center"
-          initial={{ opacity: 0, x: 200 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         >
           <h2 className="font-semibold text-yellow-400">WebGIS Developer</h2>
         </motion.div>
       </motion.div>
 
+      {/* Bottom Section: About Me and Skills */}
       <motion.div
-        className="w-2/3 flex flex-col items-center justify-center p-8"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="w-full flex flex-col items-center justify-center p-8"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10 }}
       >
-        <motion.h1
-          className="text-4xl font-bold mb-6"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: "spring", stiffness: 120, damping: 12 }}
-        >
-          Portfolio
-        </motion.h1>
-
+        {/* About Me Section */}
         <motion.div
           className="text-lg text-center mb-8"
-          initial={{ opacity: 0, x: 200 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         >
-          <h2 className="font-semibold text-yellow-400">WORK EXPERIENCE</h2>
-          <p className="mt-2 text-gray-300">
-            Specializing in Geographic Information Systems and Web Development.
+          <h2 className="font-semibold text-yellow-400">ABOUT ME</h2>
+          <p className="mt-2 text-black-300">
+            🚀 GIS & Web Developer specializing in spatial data processing, web
+            mapping, and geospatial analysis. Skilled in PostGIS, Turf.js, and
+            Magellan for efficient web-based spatial data processing. I build
+            dynamic applications using Laravel, Inertia.js, React, and
+            JavaScript, while leveraging React Native (Expo, EAS) for mobile
+            development. Experienced in Leaflet.js, Pegman, and Context API to
+            create highly interactive maps. On the backend, I work with PHP & Go
+            to develop secure, high-performance APIs. Passionate about
+            transforming complex geospatial data into actionable insights! 🌍
           </p>
         </motion.div>
 
-        {/* Skill Set Section */}
+        {/* Skills Section */}
         <motion.div
           className="w-full text-center"
           initial="hidden"
           animate="visible"
           variants={skillContainerVariants}
         >
-          <h2 className="font-semibold text-yellow-400 mb-4">SKILLS</h2>
+          <h2 className="font-semibold text-yellow-400 mb-4">SKILLS SET</h2>
           <div className="flex flex-wrap justify-center gap-2">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
-                className="px-4 py-2 bg-gray-600 rounded-full text-sm font-medium"
+                className="px-4 py-2 bg-white rounded-full text-sm font-medium"
                 variants={skillVariants}
                 whileHover={{ scale: 1.1, backgroundColor: "#f59e0b" }}
                 transition={{ type: "spring", stiffness: 300 }}

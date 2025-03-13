@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { GlobalStateContext } from "../provider/globalProvider";
 import * as turf from "@turf/turf";
 import { urbanData } from "./Data";
+import OverlayChart from "./OverlayChart";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -91,10 +92,8 @@ function MapOverlay() {
       });
 
       mapRef.current.fitBounds(bounds, {
-        zoom: 18,
+        zoom: 17,
         speed: 1,
-        pitch: 50,
-        bearing: 35,
         essential: false,
       });
     });
@@ -111,19 +110,18 @@ function MapOverlay() {
         type: "fill",
         source: "polygonSource",
         paint: {
-          "fill-color": "#ff0000",
+          "fill-color": "#ADA1AE",
           "fill-opacity": 0.3,
         },
       });
 
-      // Add a border line for polygons
       mapRef.current.addLayer({
         id: "polygonBorder",
         type: "line",
         source: "polygonSource",
         paint: {
           "line-color": "#000000",
-          "line-width": 2,
+          "line-width": 1,
         },
       });
     });
@@ -147,21 +145,31 @@ function MapOverlay() {
       } else {
         animationRef.current = requestAnimationFrame(step);
       }
-      updateBufferLayer(currentBufferSize.current);
+      updateBufferLayer(
+        currentBufferSize.current,
+        geoJsonData,
+        urbanData,
+        mapRef
+      );
     };
 
     step();
   };
 
-  const [intersectedFeatures, setIntersectedFeatures] = useState([]);
-
-  const updateBufferLayer = (bufferDistance) => {
+  const updateBufferLayer = (
+    bufferDistance,
+    geoJsonData,
+    urbanData,
+    mapRef
+  ) => {
     if (!geoJsonData) return;
 
+    // Create a buffered GeoJSON around the input data
     const bufferedGeoJson = turf.buffer(geoJsonData, bufferDistance, {
       units: "meters",
     });
 
+    // Update or add the buffer layer
     if (mapRef.current.getLayer("bufferLayer")) {
       mapRef.current.getSource("bufferSource").setData(bufferedGeoJson);
     } else {
@@ -175,23 +183,26 @@ function MapOverlay() {
         type: "fill",
         source: "bufferSource",
         paint: {
-          "fill-color": "#87CEEB", // Sky Blue
+          "fill-color": "#87CEEB",
           "fill-opacity": 0.4,
-          "fill-outline-color": "black", // Stroke Black
+          "fill-outline-color": "black",
         },
       });
     }
 
     const intersectedCategories = [];
+    const geometry = [];
 
     turf.featureEach(urbanData, (urbanFeature) => {
       if (turf.booleanIntersects(urbanFeature, bufferedGeoJson)) {
         if (urbanFeature.properties && urbanFeature.properties.category) {
           intersectedCategories.push(urbanFeature.properties.category);
+          geometry.push(urbanFeature.geometry);
         }
       }
     });
 
+    // Count occurrences of each category
     const categoryCounts = intersectedCategories.reduce((acc, category) => {
       if (acc[category]) {
         acc[category]++;
@@ -201,7 +212,51 @@ function MapOverlay() {
       return acc;
     }, {});
 
-    console.log("Category Counts:", categoryCounts);
+    setState((prev) => ({ ...prev, chartDataOvrly: categoryCounts }));
+
+    const intersectedFeatures = {
+      type: "FeatureCollection",
+      features: geometry.map((geom, index) => ({
+        type: "Feature",
+        geometry: geom,
+        properties: {
+          category: intersectedCategories[index],
+        },
+      })),
+    };
+
+    // Remove the previous intersected layer if it exists
+    if (mapRef.current.getLayer("intersectedLayer")) {
+      mapRef.current.removeLayer("intersectedLayer");
+      mapRef.current.removeSource("intersectedSource");
+    }
+
+    mapRef.current.addSource("intersectedSource", {
+      type: "geojson",
+      data: intersectedFeatures,
+    });
+
+    mapRef.current.addLayer({
+      id: "intersectedLayer",
+      type: "fill",
+      source: "intersectedSource",
+      paint: {
+        "fill-color": [
+          "match",
+          ["get", "category"],
+          "URBAN",
+          "#FE9900",
+          "GRASS LAND",
+          "#E101FF",
+          "AGRICULTURE",
+          "#00FF00",
+          "#CCCCCC",
+        ],
+        "fill-opacity": 0.3,
+      },
+    });
+
+    console.log(intersectedFeatures);
   };
 
   const handleSliderChange = (e) => {
@@ -210,11 +265,11 @@ function MapOverlay() {
     animateBuffer(newValue);
   };
 
-  const sentence = "Welcome to Indonesia".split(" ");
+  const sentence = "Disaster Irigation Risk Effect".split(" ");
 
   return (
     <motion.div
-      className="w-screen max-w-8xl mx-auto flex flex-col md:flex-row bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white text-lg shadow-lg rounded-lg overflow-hidden"
+      className="w-screen max-w-8xl mx-auto h-[900px] flex flex-col md:flex-row bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
@@ -237,6 +292,11 @@ function MapOverlay() {
             </motion.span>
           ))}
         </motion.div>
+        <motion.div className="w-full h-[400px] flex justify-center mt-4">
+          {" "}
+          {/* Ensure enough space */}
+          <OverlayChart />
+        </motion.div>
       </motion.div>
 
       {/* Right Side: Map */}
@@ -256,27 +316,41 @@ function MapOverlay() {
               position: "absolute",
               top: "10px",
               left: "10px",
-              background: "rgba(255, 255, 255, 0.8)",
-              padding: "8px 12px",
-              borderRadius: "5px",
-              boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
+              background: "rgba(255, 255, 255, 0.9)", // Slightly more opaque
+              padding: "12px 16px", // Increased padding
+              borderRadius: "8px", // Smoother corners
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Deeper shadow
               zIndex: 1000,
-              textAlign: "center", // ✅ Center text
+              textAlign: "center",
+              fontFamily: "'Arial', sans-serif", // Use a clean font
+              width: "340px", // Fixed width for better proportion
             }}
           >
+            {/* Slider Input */}
             <input
               type="range"
               min="1"
               max="100"
               defaultValue={state.bufferArea}
               onChange={handleSliderChange}
-              style={{ width: "150px" }}
+              style={{
+                width: "100%", // Full width of the container
+                cursor: "pointer", // Indicate interactivity
+                accentColor: "#007BFF", // Modern browser accent color
+              }}
             />
 
-            {/* ✅ Show latest buffer value in black color below the slider */}
-            <p style={{ marginTop: "5px", color: "black", fontWeight: "bold" }}>
-              {"buffer "}
-              {state.bufferArea} `m`
+            {/* Buffer Value Display */}
+            <p
+              style={{
+                marginTop: "8px", // Slightly more spacing
+                color: "#333", // Darker text for better readability
+                fontWeight: "600", // Semi-bold
+                fontSize: "14px", // Slightly larger font
+                letterSpacing: "0.5px", // Improve readability
+              }}
+            >
+              Buffer: {state.bufferArea} m
             </p>
           </div>
         </motion.div>

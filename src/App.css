@@ -20,3 +20,28 @@
   display: flex;
   align-items: center;
 }
+
+.scrollContainer {
+  display: flex;
+  flex-direction: column; /* Change to column for vertical scrolling */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  width: 100%;
+  height: 100%; /* Take full height of the parent */
+}
+
+.scrollItem {
+  width: 100%;
+  height: 100%; /* Each item takes full height */
+  flex-shrink: 0; /* Prevent shrinking */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Custom scrollbar for Firefox */
+.scroll-container {
+  scrollbar-width: thin; /* "auto" | "thin" | "none" */
+  scrollbar-color: #089dbb00 #00000000; /* thumb and track color */
+}

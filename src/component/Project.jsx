@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 export default function Profile() {
   return (
     <motion.div
-      className="w-full h-screen flex bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 
-                 text-white text-lg shadow-lg rounded-lg overflow-hidden items-center justify-center"
+      className="w-full h-screen flex bg-white 
+                 text-black text-lg shadow-lg rounded-lg overflow-hidden items-center justify-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}

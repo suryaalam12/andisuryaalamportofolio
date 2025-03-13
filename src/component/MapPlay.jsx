@@ -190,7 +190,7 @@ function MapPlay() {
         initial={{ opacity: 0, x: 0, scale: 0.2 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 3 }}
-        className="absolute top-10 right-10 bg-black/30 text-white p-4 rounded-lg shadow-lg"
+        className="absolute top-10 right-10 bg-black/30 text-black p-4 rounded-lg shadow-lg"
       >
         <h4 className="font-semibold mb-2">Earthquake Magnitude</h4>
         <div className="flex flex-col space-y-2">
@@ -243,7 +243,7 @@ function MapPlay() {
 
   return (
     <motion.div
-      className="w-screen max-w-8xl mx-auto flex flex-col md:flex-row bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white text-lg shadow-lg rounded-lg overflow-hidden"
+      className="w-screen max-w-8xl mx-auto flex flex-col md:flex-row bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
