@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import videoSrc1 from "../assets/pecah.mp4";
 import videoSrc2 from "../assets/gabung.mp4";
 import videoSrc3 from "../assets/trans.mp4";
 
@@ -9,7 +8,7 @@ export default function UpdatingSpatial() {
   const scrollContainerRef = useRef(null);
   const [currentSection, setCurrentSection] = useState(0);
 
-  const skills = ["Laravel", "React JS", "Tailwind", "PostGIS"];
+  const skills = ["Go-Fiber", "PostGIS", "React Native (Expo, EAS)"];
 
   const skillContainerVariants = {
     hidden: { opacity: 0 },
@@ -31,12 +30,10 @@ export default function UpdatingSpatial() {
   };
 
   // Array of video sources
-  const videoSources = [videoSrc1, videoSrc2, videoSrc3];
+  const videoSources = [videoSrc2];
 
   const descriptions = [
-    "Using PostGIS to split geometries based on intersecting feature IDs with functions like ST_Intersection or ST_Split.",
-    "Using PostGIS to merge selected features on the map based on user input, utilizing the ST_Union function.",
-    "Transform data using Turf.js to extract all intersecting feature IDs from the received GeoJSON data, add them to the map, and save the updated dataset.",
+    "Develop a React Native (Expo, EAS) application integrated with Go Fiber as the JSON and GeoJSON data provider (API), secured with JWT token authentication. Utilize Axios for real-time data synchronization, Mapbox for advanced mapping features, and geolocation for precise location tracking. This setup will enable efficient data collection and improved reporting capabilities.",
   ];
 
   const handleVideoEnd = (index) => {
@@ -78,10 +75,15 @@ export default function UpdatingSpatial() {
 
   return (
     <motion.div
-      className="scroll-container w-[1300px] h-full flex flex-col bg-white text-black text-lg shadow-2xl rounded-lg overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 10 }}
+      className="h-1/2 w-[90vw] flex flex-col md:flex-row p-0 bg-white text-black text-lg shadow-2xl rounded-lg overflow-hidden"
+      initial={{ opacity: 0, y: 20, borderWidth: 0 }}
+      animate={{ opacity: 1, y: 0, borderWidth: "2px" }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        duration: 0.5,
+      }}
     >
       <motion.div
         className="w-full flex flex-col items-center justify-center p-3 border-b border-gray-300"
@@ -96,13 +98,12 @@ export default function UpdatingSpatial() {
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         >
           <h2 className="font-semibold text-blue-600">
-            Updating Spatial Data: Accurate Property Valuation Through
-            Geospatial Technology
+            React Native & Go Fiber Integration for Geospatial Data Processing
           </h2>
         </motion.div>
 
         <motion.div
-          className="text-lg text-center mb-4"
+          className="text-lg text-left mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
@@ -121,7 +122,7 @@ export default function UpdatingSpatial() {
                 key={index}
                 className="px-4 py-2 bg-white rounded-full text-sm font-medium"
                 variants={skillVariants}
-                whileHover={{ scale: 1.1, backgroundColor: "#f59e0b" }}
+                whileHover={{ scale: 1.1, backgroundColor: "#00BFFF" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {skill}

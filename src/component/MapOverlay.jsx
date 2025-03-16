@@ -67,7 +67,8 @@ function MapOverlay() {
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      zoom: 0,
+      center: [111, -7.1],
+      zoom: 4,
     });
 
     mapRef.current.on("load", () => {
@@ -265,14 +266,19 @@ function MapOverlay() {
     animateBuffer(newValue);
   };
 
-  const sentence = "Disaster Irigation Risk Effect".split(" ");
+  const sentence = "New Irigation Risk Effect".split(" ");
 
   return (
     <motion.div
-      className="w-screen max-w-8xl mx-auto h-[900px] flex flex-col md:flex-row bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 10 }}
+      className="h-1/2 w-[90vw] flex flex-col md:flex-row p-0 bg-white text-black text-lg shadow-2xl rounded-lg overflow-hidden"
+      initial={{ opacity: 0, y: 20, borderWidth: 0 }}
+      animate={{ opacity: 1, y: 0, borderWidth: "2px" }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        duration: 0.5,
+      }}
     >
       {/* Left Side: Title and Content */}
       <motion.div
@@ -286,7 +292,7 @@ function MapOverlay() {
             <motion.span
               key={index}
               variants={wordVariants}
-              className="text-2xl font-semibold tracking-wide inline-block mr-2"
+              className="text-2xl text-blue-800 font-bold tracking-wide inline-block mr-2 mb-30"
             >
               {word}
             </motion.span>

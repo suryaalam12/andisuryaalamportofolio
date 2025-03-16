@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Profile from "./component/Profile";
+import ContactMe from "./component/ContactMe";
 import Header from "./component/Header";
 import MapPlay from "./component/MapPlay";
 import MapOverlay from "./component/MapOverlay";
@@ -19,6 +20,7 @@ function getComponentById(id, activeId) {
     3: MapOverlay,
     4: ZonasiProject,
     5: UpdatingSpatial,
+    6: ContactMe,
   };
 
   const SelectedComponent = components[id] || Profile;
@@ -86,7 +88,7 @@ export default function App() {
   return (
     <div id="example" className="relative w-full bg-white rounded-xl">
       <Header activeId={activeId} /> {/* Add the Header component here */}
-      {[1, 2, 3, 4, 5].map((id) => (
+      {[1, 2, 3, 4, 5, 6].map((id) => (
         <NumberDisplay key={id} id={id} activeId={activeId} />
       ))}
       <motion.div className="progress" style={{ scaleX }} />
@@ -108,7 +110,7 @@ function StyleSheet() {
             right: 0;
             border-radius:10px;
             height: 20px;
-            background:rgb(0, 117, 138);
+            background:#00BFFF;
             bottom: 50px;
             transform: scaleX(0);
         }

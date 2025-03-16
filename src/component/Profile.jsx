@@ -23,27 +23,29 @@ export default function Profile() {
   };
 
   const skills = [
+    // Core GIS Skills
     "GIS",
-    "Web Development",
-    "Spatial Data Processing",
     "Geospatial Analysis",
-    "PostGIS",
-    "Turf.js",
-    "Magellan",
-    "Laravel",
-    "Inertia.js",
-    "React",
-    "PostGIS",
-    "JavaScript",
-    "React Native (Expo, EAS)",
-    "Leaflet.js",
-    "Context API",
-    "Secure API Development",
-    "High-Performance Backend",
+    "Spatial Data Processing",
     "Web Mapping",
+    "PostGIS",
     "QGIS",
-    "Spatial SQL",
+
+    "TailWind",
+
+    // Backend Development
+    "Go-lang",
+    "Laravel",
+
+    // Web Development & Frontend
+    "Web Development",
+    "JavaScript",
     "JavaScript DOM Manipulation",
+    "React",
+    "Inertia.js",
+
+    // Mobile Development
+    "React Native (Expo, EAS)",
   ];
 
   const skillContainerVariants = {
@@ -67,7 +69,7 @@ export default function Profile() {
 
   return (
     <motion.div
-      className="w-full h-full flex flex-col bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
+      className="w-full h-full flex flex-col bg-gradient-to-b from-white via-gray-300 to-white text-black text-lg shadow-2xl rounded-lg overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
@@ -81,7 +83,7 @@ export default function Profile() {
       >
         {/* Avatar */}
         <motion.div
-          className="w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-400 mb-4"
+          className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600 mb-4"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
@@ -118,7 +120,7 @@ export default function Profile() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         >
-          <h2 className="font-semibold text-yellow-400">WebGIS Developer</h2>
+          <h2 className="font-semibold text-blue-600">WebGIS Developer</h2>
         </motion.div>
       </motion.div>
 
@@ -136,17 +138,17 @@ export default function Profile() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
         >
-          <h2 className="font-semibold text-yellow-400">ABOUT ME</h2>
+          <h2 className="font-semibold text-blue-600">ABOUT ME</h2>
           <p className="mt-2 text-black-300">
             🚀 GIS & Web Developer specializing in spatial data processing, web
-            mapping, and geospatial analysis. Skilled in PostGIS, Turf.js, and
-            Magellan for efficient web-based spatial data processing. I build
-            dynamic applications using Laravel, Inertia.js, React, and
-            JavaScript, while leveraging React Native (Expo, EAS) for mobile
-            development. Experienced in Leaflet.js, Pegman, and Context API to
-            create highly interactive maps. On the backend, I work with PHP & Go
-            to develop secure, high-performance APIs. Passionate about
-            transforming complex geospatial data into actionable insights! 🌍
+            mapping, and geospatial analysis. Skilled in PostGIS and Turf.js for
+            efficient web-based spatial data processing. I build dynamic
+            applications using Laravel, Inertia.js, React, and JavaScript, while
+            leveraging React Native (Expo, EAS) for mobile development.
+            Experienced in Leaflet.js, Mapbox and Context API to create highly
+            interactive maps. On the backend, I work with PHP and Go to develop
+            secure, high-performance APIs. Passionate about transforming complex
+            geospatial data into actionable insights! 🌍
           </p>
         </motion.div>
 
@@ -157,14 +159,14 @@ export default function Profile() {
           animate="visible"
           variants={skillContainerVariants}
         >
-          <h2 className="font-semibold text-yellow-400 mb-4">SKILLS SET</h2>
+          <h2 className="font-semibold text-blue-600 mb-4">SKILLS SET</h2>
           <div className="flex flex-wrap justify-center gap-2">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
                 className="px-4 py-2 bg-white rounded-full text-sm font-medium"
                 variants={skillVariants}
-                whileHover={{ scale: 1.1, backgroundColor: "#f59e0b" }}
+                whileHover={{ scale: 1.1, backgroundColor: "#00BFFF" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {skill}

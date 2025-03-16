@@ -9,7 +9,7 @@ export default function Header({ activeId }) {
     2: "Interactive Data Visualizations",
     3: "Spatial Analysis & Dynamic Mapping",
     4: "Project: Webmap PBB P-2",
-    5: "Project: Webmap Updating Spatial Data ",
+    5: "Project: Survey Pajak Kendaraan Bermotor",
   };
 
   const pageName = pageNames[activeId] || "Profile";
@@ -48,10 +48,11 @@ export default function Header({ activeId }) {
     <>
       {/* Header */}
       <motion.header
-        className="fixed top-0 left-0 right-0 h-[150px] bg-white text-[#00BFFF] p-4 z-50 flex items-center justify-center"
+        className="fixed top-0 left-0 right-0 h-[150px] bg-gradient-to-b from-gray-200 to-white text-[#00BFFF] p-4 z-50 flex items-center justify-center"
         initial="hidden"
         animate="visible"
         variants={headerVariants}
+        style={{ color: "#00BFFF" }} // Siren-like blue color
       >
         <motion.div className="flex items-center gap-3" variants={textVariants}>
           <h6 className="text-2xl font-semibold tracking-tight">{pageName}</h6>

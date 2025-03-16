@@ -35,8 +35,8 @@ function MapPlay() {
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/satellite-v9",
-      center: [0, 0],
-      zoom: 1,
+      center: [111, -7.1],
+      zoom: 4,
       pitch: 60,
       bearing: 0,
       antialias: true,
@@ -243,10 +243,15 @@ function MapPlay() {
 
   return (
     <motion.div
-      className="w-screen max-w-8xl mx-auto flex flex-col md:flex-row bg-white text-black text-lg shadow-lg rounded-lg overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 10 }}
+      className="h-1/2 w-[90vw] flex flex-col md:flex-row p-0 bg-white text-black text-lg shadow-2xl rounded-lg overflow-hidden"
+      initial={{ opacity: 0, y: 20, borderWidth: 0 }}
+      animate={{ opacity: 1, y: 0, borderWidth: "2px" }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        duration: 0.5,
+      }}
     >
       {/* Left Side: Title and Content */}
       <motion.div
@@ -260,7 +265,7 @@ function MapPlay() {
             <motion.span
               key={index}
               variants={wordVariants}
-              className="text-2xl font-semibold tracking-wide inline-block mr-2"
+              className="text-2xl text-blue-800 font-bold tracking-wide inline-block mr-2 mb-20"
             >
               {word}
             </motion.span>
