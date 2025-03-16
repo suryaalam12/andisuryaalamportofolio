@@ -52,7 +52,7 @@ export default function Header({ activeId }) {
         initial="hidden"
         animate="visible"
         variants={headerVariants}
-        style={{ color: "#00BFFF" }} // Siren-like blue color
+        style={{ color: "#00BFFF" }}
       >
         <motion.div className="flex items-center gap-3" variants={textVariants}>
           <h6 className="text-2xl font-semibold tracking-tight">{pageName}</h6>

@@ -190,13 +190,13 @@ function MapPlay() {
         initial={{ opacity: 0, x: 0, scale: 0.2 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 3 }}
-        className="absolute top-10 right-10 bg-black/30 text-black p-4 rounded-lg shadow-lg"
+        className="absolute top-20 right-10 bg-gray-400/30 text-white p-1 rounded-lg shadow-lg"
       >
         <h4 className="font-semibold mb-2">Earthquake Magnitude</h4>
         <div className="flex flex-col space-y-2">
           <div className="flex items-center">
             <div
-              className="w-4 h-4 rounded-full mr-2"
+              className="w-2 h-2 rounded-full mr-2"
               style={{ backgroundColor: "#FFEDA0" }}
             ></div>
             <span>4.5 - 5.0</span>
@@ -265,7 +265,7 @@ function MapPlay() {
             <motion.span
               key={index}
               variants={wordVariants}
-              className="text-2xl text-blue-800 font-bold tracking-wide inline-block mr-2 mb-20"
+              className="text-xl text-blue-800 font-bold tracking-wide inline-block mr-2 mb-5"
             >
               {word}
             </motion.span>
