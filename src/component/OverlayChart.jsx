@@ -23,19 +23,18 @@ export default function OverlayChart() {
 
   useEffect(() => {
     if (state.chartDataOvrly && Object.keys(state.chartDataOvrly).length > 0) {
-      // Transform the state.chartDataOvrly object into an array of objects for Recharts
       const transformedData = Object.keys(state.chartDataOvrly).map((key) => ({
-        name: key, // Category name (e.g., "GRASS LAND")
-        value: state.chartDataOvrly[key], // Corresponding value (e.g., 4)
-        fill: colors[key] || "#8884d8", // Default color if not defined
+        name: key,
+        value: state.chartDataOvrly[key],
+        fill: colors[key] || "#8884d8",
       }));
-      setChartData(transformedData); // Update chartData state
+      setChartData(transformedData);
       console.log("Chart data updated:", transformedData);
     } else {
-      setChartData([]); // Set chartData to an empty array if state.chartDataOvrly is empty or null
+      setChartData([]);
       console.log("Chart data is empty or null");
     }
-  }, [state.chartDataOvrly]); // Run this effect whenever state.chartDataOvrly changes
+  }, [state.chartDataOvrly]);
 
   return (
     <div style={{ width: "100%", height: "400px" }}>

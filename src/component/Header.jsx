@@ -48,7 +48,7 @@ export default function Header({ activeId }) {
     <>
       {/* Header */}
       <motion.header
-        className="fixed top-0 left-0 right-0 h-[150px] bg-gradient-to-b from-gray-200 to-white text-[#00BFFF] p-4 z-50 flex items-center justify-center"
+        className="fixed top-0 left-0 right-0 h-[100px] bg-gradient-to-b from-gray-200 to-white text-[#00BFFF] p-4 z-50 flex items-center justify-center"
         initial="hidden"
         animate="visible"
         variants={headerVariants}
