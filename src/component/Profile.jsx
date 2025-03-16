@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import pp from "../assets/pp.png";
 
 export default function Profile() {
   const sentence = "Andi Surya Alam".split(" ");
@@ -83,13 +84,13 @@ export default function Profile() {
       >
         {/* Avatar */}
         <motion.div
-          className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600 mb-4"
+          style={{ width: "200px", height: "200px", overflow: "hidden" }}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
         >
           <img
-            src="/path-to-your-avatar.jpg"
+            src={pp}
             alt="Your Avatar"
             className="w-full h-full object-cover"
           />
